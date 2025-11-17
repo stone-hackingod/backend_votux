@@ -38,7 +38,12 @@ const dbConfig = {
   port: env.MYSQL_PORT,
   user: env.MYSQL_USER,
   password: env.MYSQL_PASSWORD,
-  database: env.MYSQL_DATABASE
+  database: env.MYSQL_DATABASE,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+  connectTimeout: env.MYSQL_CONNECT_TIMEOUT,
+  ssl: env.MYSQL_SSL ? { rejectUnauthorized: true } : undefined
 };
 
 const pool = mysql.createPool(dbConfig);
