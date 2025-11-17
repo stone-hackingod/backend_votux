@@ -43,7 +43,10 @@ const dbConfig = {
   connectionLimit: 10,
   queueLimit: 0,
   connectTimeout: env.MYSQL_CONNECT_TIMEOUT,
-  ssl: env.MYSQL_SSL ? { rejectUnauthorized: true } : undefined
+  ssl: env.MYSQL_SSL ? {
+    ca: env.MYSQL_SSL_CA && env.MYSQL_SSL_CA.trim().length > 0 ? env.MYSQL_SSL_CA : undefined,
+    rejectUnauthorized: env.MYSQL_REJECT_UNAUTHORIZED
+  } : undefined
 };
 
 const pool = mysql.createPool(dbConfig);

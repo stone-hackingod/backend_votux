@@ -77,6 +77,10 @@ export const env = {
   MYSQL_USER: process.env.MYSQL_USER || 'root',
   MYSQL_PASSWORD: process.env.MYSQL_PASSWORD || '',
   MYSQL_DATABASE: process.env.MYSQL_DATABASE || 'votux',
+  MYSQL_SSL: String(process.env.MYSQL_SSL || '').toLowerCase() === 'true',
+  MYSQL_CONNECT_TIMEOUT: parseInt(process.env.MYSQL_CONNECT_TIMEOUT || '15000', 10),
+  MYSQL_SSL_CA: process.env.MYSQL_SSL_CA || '',
+  MYSQL_REJECT_UNAUTHORIZED: (process.env.MYSQL_REJECT_UNAUTHORIZED || 'true').toLowerCase() === 'true',
 
   // MongoDB
   MONGODB_URI: process.env.MONGODB_URI,
