@@ -44,7 +44,7 @@ const dbConfig = {
   queueLimit: 0,
   connectTimeout: env.MYSQL_CONNECT_TIMEOUT,
   ssl: env.MYSQL_SSL ? {
-    ca: env.MYSQL_SSL_CA && env.MYSQL_SSL_CA.trim().length > 0 ? env.MYSQL_SSL_CA : undefined,
+    ca: env.MYSQL_SSL_CA && env.MYSQL_SSL_CA.trim().length > 0 ? [env.MYSQL_SSL_CA] : undefined,
     rejectUnauthorized: env.MYSQL_REJECT_UNAUTHORIZED
   } : undefined
 };
