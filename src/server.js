@@ -33,6 +33,15 @@ app.use(helmet());
 app.set('etag', 'strong');
 
 // Configuration MySQL
+// Support CA provided as plain PEM (MYSQL_SSL_CA) or base64 (MYSQL_SSL_CA_B64)
+let mysqlCaList = undefined;
+try {
+  const caPem = (env.MYSQL_SSL_CA || '').trim();
+  const caB64 = (env.MYSQL_SSL_CA_B64 || '').trim();
+  if (caPem.length > 0) mysqlCaList = [caPem];
+  else if (caB64.length > 0) mysqlCaList = [Buffer.from(caB64, 'base64').toString('utf8')];
+} catch {}
+
 const dbConfig = {
   host: env.MYSQL_HOST,
   port: env.MYSQL_PORT,
@@ -44,7 +53,7 @@ const dbConfig = {
   queueLimit: 0,
   connectTimeout: env.MYSQL_CONNECT_TIMEOUT,
   ssl: env.MYSQL_SSL ? {
-    ca: env.MYSQL_SSL_CA && env.MYSQL_SSL_CA.trim().length > 0 ? [env.MYSQL_SSL_CA] : undefined,
+    ca: mysqlCaList,
     rejectUnauthorized: env.MYSQL_REJECT_UNAUTHORIZED
   } : undefined
 };
