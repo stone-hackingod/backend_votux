@@ -46,27 +46,38 @@ cp .env.example .env
 ```
 Éditez le fichier `.env` :
 ```env
-# Server
-NODE_ENV=development
-PORT=3001
-FRONTEND_URL=http://localhost:8080
+# Serveur
+NODE_ENV=production
+FRONTEND_URL=https://votux.vercel.app/
+FRONTEND_URLS=https://votux.vercel.app/
 
-# MySQL Database
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_DATABASE=votux
-MYSQL_USER=root
-MYSQL_PASSWORD=
+# MySQL (Aiven)
+MYSQL_HOST=your-mysql-host.aivencloud.com
+MYSQL_PORT=12345
+MYSQL_DATABASE=your_database
+MYSQL_USER=your_username
+MYSQL_PASSWORD=your_secure_password
+MYSQL_SSL=true
+MYSQL_REJECT_UNAUTHORIZED=true
+MYSQL_CONNECT_TIMEOUT=30000
+MYSQL_SSL_CA=your_ssl_ca_content_here
+# OU utiliser MYSQL_SSL_CA_B64 pour une version encodée en base64
+# MYSQL_SSL_CA_B64=base64_encoded_ssl_ca_here
 
-# MongoDB
-MONGODB_URI=mongodb://localhost:27017/votux
+# MongoDB (Atlas)
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/your_database?retryWrites=true&w=majority
 
-# JWT
-JWT_SECRET=votux_super_secret_key_change_in_production
+# Sécurité
+JWT_SECRET=your_secure_jwt_secret
 JWT_EXPIRES_IN=24h
+ENCRYPTION_KEY=your_secure_encryption_key
 
-# Encryption
-ENCRYPTION_KEY=voici_une_cle_secrete_pour_votux_2025!
+# SMTP (Brevo)
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=your_brevo_username
+SMTP_PASS=your_brevo_password
+MAIL_FROM="Your App Name <your-email@example.com>"
 ```
 
 4. **Initialiser la base de données**
